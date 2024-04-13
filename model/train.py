@@ -192,29 +192,6 @@ def epoch_phase(phase, device, model, loader_dict, metric_collection, criterion,
             # zero the parameter gradients
             optimizer.zero_grad()
 
-            ########## OLD
-
-            # with torch.set_grad_enabled(False):
-            #     preds = model(
-            #         id_tensor,
-            #         mask_tensor,
-            #         token_type_tensor
-            #     )
-            #     # preds = outputs # torch.squeeze(outputs)
-            #     loss = criterion(preds, label_tensor)
-
-            #     # update running loss
-            #     running_loss += loss.item()
-
-            #     # update metric collection
-            #     metric_collection.update(preds, label_tensor)
-                
-            #     tweet_id_list += batch_id_list
-            #     pred_list.append(preds.detach().cpu()) #.numpy())
-            #     label_list.append(label_tensor.detach().cpu().numpy())
-
-            ##########
-
             # track history if in train
             with torch.set_grad_enabled(phase == 'train'):
                 # get model outputs for the current batch
@@ -226,11 +203,11 @@ def epoch_phase(phase, device, model, loader_dict, metric_collection, criterion,
 
                 # get the loss for the current batch preds and update
                 # the running loss
-                loss = criterion(preds, y)
+                loss = criterion(preds, label_tensor)
                 running_loss += loss.item()
 
                 # update metric collection
-                metric_collection.update(preds, y)
+                metric_collection.update(preds, label_tensor)
 
                 # if train phase, backpropogate and step with the optimizer
                 if phase == 'train':
