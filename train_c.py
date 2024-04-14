@@ -1,5 +1,5 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "6"
+os.environ["CUDA_VISIBLE_DEVICES"] = "4"
 import pandas as pd
 import random
 from dataclasses import dataclass
@@ -138,14 +138,14 @@ if __name__ == "__main__":
 
     MAX_LEN = 256
     BATCH_SIZE = 128
-    SEED = 2376124
+    SEED = 534238
     TASK_TYPE = 'multilabel'
     NUM_CLASSES = 2
     NUM_LABELS = 3
     AVERAGE_STRATEGY = 'global'
-    LEARNING_RATE = 1e-5
+    LEARNING_RATE = 5e-7
     EPOCHS = 40
-    MODEL_NAME = 'roberta-test-a'
+    MODEL_NAME = 'roberta-test-c'
     
     # get cpu, gpu or mps device for training.
     device = (

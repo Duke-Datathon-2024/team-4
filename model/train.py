@@ -207,7 +207,7 @@ def epoch_phase(phase, device, model, loader_dict, metric_collection, criterion,
                 running_loss += loss.item()
 
                 # update metric collection
-                metric_collection.update(preds, label_tensor)
+                metric_collection.update(preds, label_tensor.long())
 
                 # if train phase, backpropogate and step with the optimizer
                 if phase == 'train':
